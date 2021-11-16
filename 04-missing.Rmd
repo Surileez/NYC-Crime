@@ -1,1 +1,8 @@
 # Missing values
+```{r}
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+nyc <- read.csv("NYPD_Arrests_Data__Historic_.csv", nrows = 100)
+
+```
+
