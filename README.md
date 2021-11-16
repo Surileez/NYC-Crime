@@ -1,4 +1,4 @@
-## ABSOLUTE ESSENTIALS
+## EDAV of crime incidents in NYC
 
 This is the final project of Team 8 of STAT5702 EDAV Fall 2021 in Data Science program of Columbia University.
 
