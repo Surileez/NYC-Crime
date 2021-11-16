@@ -7,3 +7,8 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+New York is one of the most developed cities in the world. The safety of this city is closely related to millions of New Yorkers. 
+
+In this project, we visualize crime incidents in New York City from 2013 to 2021 from multiple perspectives such as total numbers, crime types, location, genders, and ages. At the same time, we analyze factors that may be related to the crime rate in New York City.
+
+As the COVID-19 has had a huge impact on the entire human society, we also explore how the COVID-19 epidemic affects the criminal condition in New York City.
