@@ -24,7 +24,6 @@ Final Test!!!!!!!!!!!
 ### DATA-2
 ```{r fig.width=10,fig.height=10}
 covid <- read.csv("COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv", nrows = 100)
-
 plot_missing(covid, percent = TRUE)
 ```
 
