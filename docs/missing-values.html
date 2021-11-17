@@ -175,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="missing-values.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;plot_missing.R&quot;</span>)</span>
 <span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">1000</span>)</span>
 <span id="cb1-3"><a href="missing-values.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="960" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
 <p>Insights:
 * In order to draw the picture more clearly, we select 10,000 rows of data for missing value plot.
 * We can conclude that KY_CD and PD_CD have the highest percentage of missing value. Besides, X_COORD_CD, Y_COORD_CD, Latitude and Longitude belong to geographic location information and tend to miss together.
@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.0.2</span> DATA-2</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="missing-values.html#cb2-1" aria-hidden="true" tabindex="-1"></a>covid <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
 <span id="cb2-2"><a href="missing-values.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(covid, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="960" />
+<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="960" />
 Insights:
 This is no missing value in this dataset~</p>
 </div>
@@ -193,7 +193,7 @@ This is no missing value in this dataset~</p>
 <h3><span class="header-section-number">4.0.3</span> DATA-3</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="missing-values.html#cb3-1" aria-hidden="true" tabindex="-1"></a>mental <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Mental_Health_Service_Finder_Data.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">50</span>)</span>
 <span id="cb3-2"><a href="missing-values.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(mental, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
 
 </div>
 </div>
