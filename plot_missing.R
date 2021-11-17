@@ -60,5 +60,6 @@ plot_missing<-function(data,percent=FALSE){
 2223
 2223
 "
-  numrows+mainplot+rowcount+plot_layout(design=design)
+  numrows+mainplot+rowcount+
+    plot_layout(design=design)
 }
