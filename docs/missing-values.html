@@ -169,10 +169,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb1-3"><a href="missing-values.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
 <span id="cb1-4"><a href="missing-values.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="missing-values.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))</span></span>
-<span id="cb1-6"><a href="missing-values.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;plot_missing.R&quot;</span>)</span>
-<span id="cb1-7"><a href="missing-values.html#cb1-7" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
-<span id="cb1-8"><a href="missing-values.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb1-5"><a href="missing-values.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;plot_missing.R&quot;</span>)</span>
+<span id="cb1-6"><a href="missing-values.html#cb1-6" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
+<span id="cb1-7"><a href="missing-values.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 
 </div>
