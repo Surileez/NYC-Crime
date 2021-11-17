@@ -13,6 +13,5 @@ library(reshape2)
 source("plot_missing.R")
 nyc <- read.csv("NYPD_Arrests_Data__Historic_.csv", nrows = 100)
 plot_missing(nyc, percent = TRUE)
-
 ```
 
