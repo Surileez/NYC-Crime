@@ -6,7 +6,8 @@ plot_missing<-function(data,percent=FALSE){
   if(percent){
     missing_patterns<-missing_patterns%>%
       mutate(count=count/sum(count)*100)
-    }
+  }
+  
   level_order<-names(sort(colSums(is.na(data)),decreasing=TRUE))
   data_m<-missing_patterns%>%subset(select=-count)
   id<-which(rowSums(data_m)==0)
@@ -15,6 +16,7 @@ plot_missing<-function(data,percent=FALSE){
   data_m<-data_m%>%mutate(ID = rownames(.))%>%
     melt(id.vars=c("ID"))%>%
     mutate(missing = ifelse(ID==id,2,ifelse(value=="TRUE", 1, 0)))
+  
   
   mainplot<-ggplot(data_m, aes(x=factor(variable,levels=level_order), y=factor(ID,rev(unique(ID))))) +
     geom_tile(aes(fill=factor(missing)),color = "white") + 
@@ -60,5 +62,6 @@ plot_missing<-function(data,percent=FALSE){
 2223
 2223
 "
-  numrows+mainplot+rowcount+plot_layout(design=design)
+  numrows+mainplot+rowcount+
+    plot_layout(design=design)
 }
