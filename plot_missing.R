@@ -7,26 +7,26 @@ plot_missing<-function(data,percent=FALSE){
     missing_patterns<-missing_patterns%>%
       mutate(count=count/sum(count)*100)
   }
-  
-  level_order<-names(sort(colSums(is.na(data)),decreasing=TRUE))
+  level_order<-names(sort(colSums(is.na(data)),decreasing= TRUE))
   data_m<-missing_patterns%>%subset(select=-count)
   id<-which(rowSums(data_m)==0)
+  if (length(id)==0){
+    id=-1
+  }
   row<-nrow(data_m)
   col<-ncol(data_m)
   data_m<-data_m%>%mutate(ID = rownames(.))%>%
     melt(id.vars=c("ID"))%>%
-    mutate(missing = ifelse(ID==id,2,ifelse(value=="TRUE", 1, 0)))
-  
+    mutate(missing = ifelse(ID==id,-1,ifelse(value == "TRUE", 1, 0)))
   
   mainplot<-ggplot(data_m, aes(x=factor(variable,levels=level_order), y=factor(ID,rev(unique(ID))))) +
     geom_tile(aes(fill=factor(missing)),color = "white") + 
-    scale_fill_manual(values=alpha(c("grey", "blueviolet","grey"), c(.4,.4,0.9)))+
+    scale_fill_manual(values = alpha(c("grey", "grey","blueviolet"), c(.9,.4,.4)))+
     geom_text(aes(x=(1+col)/2,y=row-id+1), label = "complete cases")+
     xlab('variable')+
     ylab('missing pattern')+
     guides(fill='none')+
-    theme_classic()+
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+    theme_classic()
   
   rowcount<-ggplot(missing_patterns,aes(x=factor(rownames(missing_patterns),rev(rownames(missing_patterns))),y=count))+
     geom_bar(stat='identity',fill=ifelse(rownames(missing_patterns)==id,'cornflowerblue',alpha('cornflowerblue',0.5)))+
@@ -50,8 +50,7 @@ plot_missing<-function(data,percent=FALSE){
     theme_bw()+
     theme(panel.grid.major.x=element_blank())+
     xlab('')+
-    ylab(ifelse(percent,'%rows missing','num rows missing'))+
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+    ylab(ifelse(percent,'%rows missing','num rows missing'))
   if(percent){
     numrows<-numrows+ylim(0,100)
   }
@@ -62,6 +61,5 @@ plot_missing<-function(data,percent=FALSE){
 2223
 2223
 "
-  numrows+mainplot+rowcount+
-    plot_layout(design=design)
+  numrows+mainplot+rowcount+plot_layout(design=design)
 }
