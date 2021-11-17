@@ -14,7 +14,7 @@ plot_missing<-function(data,percent=FALSE){
   col<-ncol(data_m)
   data_m<-data_m%>%mutate(ID = rownames(.))%>%
     melt(id.vars=c("ID"))%>%
-    mutate(missing = ifelse(ID==id,2,ifelse(value == "TRUE", 1, 0)))
+    mutate(missing = ifelse(ID==id,2,ifelse(value=="TRUE", 1, 0)))
   
   mainplot<-ggplot(data_m, aes(x=factor(variable,levels=level_order), y=factor(ID,rev(unique(ID))))) +
     geom_tile(aes(fill=factor(missing)),color = "white") + 
