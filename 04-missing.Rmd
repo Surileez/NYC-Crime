@@ -10,8 +10,7 @@ library(reshape2)
 ```
 
 ### DATA-1
-```{r}
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```{r width=100,height=100}
 source("plot_missing.R")
 nyc <- read.csv("NYPD_Arrests_Data__Historic_.csv", nrows = 100)
 plot_missing(nyc, percent = TRUE)
@@ -21,8 +20,9 @@ Insights：
 NYC
 
 ### DATA-2
-```{r}
+```{r fig.width=10,fig.height=10}
 covid <- read.csv("COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv", nrows = 100)
+
 plot_missing(covid, percent = TRUE)
 ```
 

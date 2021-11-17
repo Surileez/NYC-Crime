@@ -172,10 +172,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
 <div id="data-1" class="section level3" number="4.0.1">
 <h3><span class="header-section-number">4.0.1</span> DATA-1</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="missing-values.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))</span></span>
-<span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;plot_missing.R&quot;</span>)</span>
-<span id="cb1-3"><a href="missing-values.html#cb1-3" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
-<span id="cb1-4"><a href="missing-values.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="missing-values.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;plot_missing.R&quot;</span>)</span>
+<span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
+<span id="cb1-3"><a href="missing-values.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Insights：
 NYC</p>
@@ -183,8 +182,9 @@ NYC</p>
 <div id="data-2" class="section level3" number="4.0.2">
 <h3><span class="header-section-number">4.0.2</span> DATA-2</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="missing-values.html#cb2-1" aria-hidden="true" tabindex="-1"></a>covid <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
-<span id="cb2-2"><a href="missing-values.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(covid, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<span id="cb2-2"><a href="missing-values.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="missing-values.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(covid, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="960" /></p>
 </div>
 <div id="data-3" class="section level3" number="4.0.3">
 <h3><span class="header-section-number">4.0.3</span> DATA-3</h3>
