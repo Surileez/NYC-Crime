@@ -17,7 +17,9 @@ plot_missing(nyc, percent = TRUE)
 ```
 
 Insights：
-NYC
+Here in our missing value plot, we can conclude that our data quality is good totally. KY_CD has largest missing proportion, which is around 25%.
+This is a test for branch!!
+Final Test!!!!!!!!!!!
 
 ### DATA-2
 ```{r fig.width=10,fig.height=10}
