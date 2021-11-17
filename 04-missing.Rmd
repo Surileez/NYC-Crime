@@ -10,7 +10,6 @@ library(tidyverse)
 library(patchwork)
 library(reshape2)
 
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 source("plot_missing.R")
 nyc <- read.csv("NYPD_Arrests_Data__Historic_.csv", nrows = 100)
 plot_missing(nyc, percent = TRUE)
