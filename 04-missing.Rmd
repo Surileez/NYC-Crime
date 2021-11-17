@@ -10,7 +10,7 @@ library(reshape2)
 ```
 
 ### DATA-1
-```{r width=100,height=300}
+```{r fig.width=10,fig.height=10}
 source("plot_missing.R")
 nyc <- read.csv("NYPD_Arrests_Data__Historic_.csv", nrows = 1000)
 plot_missing(nyc, percent = TRUE)
@@ -29,17 +29,10 @@ plot_missing(covid, percent = TRUE)
 Insights:
 This is no missing value in this dataset~
 
-
 ### DATA-3
-```{r}
-data <- read.csv("Mental_Health_Service_Finder_Data.csv", nrows = 100)
-#plot_missing(mental, percent = TRUE)
-```
-
-### economic
-```{r}
-plot_missing(economics, percent = TRUE)
-
+```{r fig.width=10,fig.height=12}
+mental <- read.csv("Mental_Health_Service_Finder_Data.csv", nrows = 50)
+plot_missing(mental, percent = TRUE)
 ```
 
 

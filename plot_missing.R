@@ -26,7 +26,8 @@ plot_missing<-function(data,percent=FALSE){
     xlab('variable')+
     ylab('missing pattern')+
     guides(fill='none')+
-    theme_classic()
+    theme_classic()+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
   
   rowcount<-ggplot(missing_patterns,aes(x=factor(rownames(missing_patterns),rev(rownames(missing_patterns))),y=count))+
     geom_bar(stat='identity',fill=ifelse(rownames(missing_patterns)==id,'cornflowerblue',alpha('cornflowerblue',0.5)))+
@@ -50,7 +51,9 @@ plot_missing<-function(data,percent=FALSE){
     theme_bw()+
     theme(panel.grid.major.x=element_blank())+
     xlab('')+
-    ylab(ifelse(percent,'%rows missing','num rows missing'))
+    ylab(ifelse(percent,'%rows missing','num rows missing'))+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  
   if(percent){
     numrows<-numrows+ylim(0,100)
   }
