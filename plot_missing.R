@@ -18,7 +18,7 @@ plot_missing<-function(data,percent=FALSE){
   
   mainplot<-ggplot(data_m, aes(x=factor(variable,levels=level_order), y=factor(ID,rev(unique(ID))))) +
     geom_tile(aes(fill=factor(missing)),color = "white") + 
-    scale_fill_manual(values = alpha(c("grey", "blueviolet","grey"), c(.4,.4,0.9)))+
+    scale_fill_manual(values=alpha(c("grey", "blueviolet","grey"), c(.4,.4,0.9)))+
     geom_text(aes(x=(1+col)/2,y=row-id+1), label = "complete cases")+
     xlab('variable')+
     ylab('missing pattern')+
