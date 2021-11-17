@@ -32,3 +32,11 @@ plot_missing(covid, percent = TRUE)
 mental <- read.csv("Mental_Health_Service_Finder_Data.csv", nrows = 100)
 #plot_missing(mental, percent = TRUE)
 ```
+
+### test 
+
+```{r}
+source("plot_missing.R")
+plot_missing(economics)
+```
+
