@@ -3,26 +3,32 @@
 # this prevents package loading message from appearing in the rendered version of your problem set
 knitr::opts_chunk$set(warning = FALSE, message = FALSE,
                       echo = TRUE)
-```
-
-### DATA-1
-```{r}
 library(tidyverse)
 library(patchwork)
 library(reshape2)
 
+```
+
+### DATA-1
+```{r width=100,height=100}
 source("plot_missing.R")
 nyc <- read.csv("NYPD_Arrests_Data__Historic_.csv", nrows = 100)
 plot_missing(nyc, percent = TRUE)
 ```
 
 Insights：
-NYC
-
-This is a test for branch merge.
+Here in our missing value plot, we can conclude that our data quality is good totally. KY_CD has largest missing proportion, which is around 25%.
+This is a test for branch!!
+Final Test!!!!!!!!!!!
 
 ### DATA-2
+```{r fig.width=10,fig.height=10}
+covid <- read.csv("COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv", nrows = 100)
+plot_missing(covid, percent = TRUE)
+```
+
+### DATA-3
 ```{r}
-
-
+mental <- read.csv("Mental_Health_Service_Finder_Data.csv", nrows = 100)
+#plot_missing(mental, percent = TRUE)
 ```

@@ -7,7 +7,7 @@ plot_missing<-function(data,percent=FALSE){
     missing_patterns<-missing_patterns%>%
       mutate(count=count/sum(count)*100)
     }
-  level_order<-names(sort(colSums(is.na(data)),decreasing= TRUE))
+  level_order<-names(sort(colSums(is.na(data)),decreasing=TRUE))
   data_m<-missing_patterns%>%subset(select=-count)
   id<-which(rowSums(data_m)==0)
   row<-nrow(data_m)
