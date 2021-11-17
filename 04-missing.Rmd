@@ -36,7 +36,6 @@ mental <- read.csv("Mental_Health_Service_Finder_Data.csv", nrows = 100)
 ### test 
 
 ```{r}
-source("plot_missing.R")
 plot_missing(economics)
 ```
 
