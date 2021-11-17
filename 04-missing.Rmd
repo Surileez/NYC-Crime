@@ -5,6 +5,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
                       echo = TRUE)
 ```
 
+### DATA-1
 ```{r}
 library(tidyverse)
 library(patchwork)
@@ -15,3 +16,12 @@ nyc <- read.csv("NYPD_Arrests_Data__Historic_.csv", nrows = 100)
 plot_missing(nyc, percent = TRUE)
 ```
 
+Insights：
+NYC
+
+
+### DATA-2
+```{r}
+
+
+```
