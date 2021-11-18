@@ -1,4 +1,4 @@
-plot_missing<-function(data,percent=FALSE,angle=0,vjust=0.5,hjust=0.5){
+plot_missing<-function(data,percent=FALSE,angle=0,vjust=0.5,hjust=0.5,title='missing value patterns'){
   missing_patterns <- data.frame(is.na(data)) %>%
     group_by_all() %>%
     count(name = "count", sort = TRUE) %>%
@@ -53,7 +53,7 @@ plot_missing<-function(data,percent=FALSE,angle=0,vjust=0.5,hjust=0.5){
   }
   numrows<-ggplot(df,aes(x=factor(rownames(df),levels=level_order),y=count))+
     geom_bar(stat='identity',fill=alpha('cornflowerblue',0.5))+
-    ggtitle('missing value patterns')+
+    ggtitle(title)+
     xlab('')+
     ylab(ifelse(percent,'%rows missing','num rows missing'))+
     theme_bw()+
