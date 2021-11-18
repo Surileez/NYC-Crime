@@ -6,15 +6,46 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
 library(tidyverse)
 library(patchwork)
 library(reshape2)
-
+library(mi)
+library(readr)
 ```
 
 ### DATA-1 Arrest Historic Data
-```{r fig.width=10,fig.height=10}
+
+```{r}
 source("plot_missing.R")
 nyc <- read.csv("NYPD_Arrests_Data__Historic_.csv", nrows = 100)
+```
+
+
+```{r fig.width=10,fig.height=12}
+tidynyc <- nyc %>% 
+    rownames_to_column("id") %>% 
+    gather(key, value, -id) %>% 
+    mutate(missing = ifelse(is.na(value), "yes", "no"))
+
+ggplot(tidynyc, aes(x = key, y = fct_rev(id), fill = missing)) +
+  geom_tile(color = "white") + 
+  ggtitle("mtcars with NAs added") +
+  scale_fill_viridis_d() + # discrete scale
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust=.5, hjust=1))
+```
+
+```{r}
+x <- missing_data.frame(tidynyc)
+image(x)
+```
+
+```{r}
+library(extracat)
+visna(nyc, sort = "b")
+```
+```{r fig.width=10,fig.height=10}
+
 plot_missing(nyc, percent = TRUE,angle=90,hjust=1)
 ```
+
 
 Insights:\n
 
@@ -22,20 +53,79 @@ a) In order to draw the picture more clearly, we select 100 rows of data for mis
 
 b) We can conclude that KY_CD and PD_CD have the highest percentage of missing value. Besides, X_COORD_CD, Y_COORD_CD, Latitude and Longitude belong to geographic location information and tend to miss together.\n
 
-c)Since the proportion of missing value for all column is small in total, so our dataset has good quality. We may just remove the rows which has missing value when we do the following analysis.
+c) Since the proportion of missing value for all column is small in total, so our dataset has good quality. We may just remove the rows which has missing value when we do the following analysis.
 
 ### DATA-2 COVID-19 Data
 ```{r fig.width=10,fig.height=10}
 covid <- read.csv("COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv", nrows = 100)
+```
+
+```{r fig.width=10,fig.height=12}
+tidycovid <- covid %>% 
+    rownames_to_column("id") %>% 
+    gather(key, value, -id) %>% 
+    mutate(missing = ifelse(is.na(value), "yes", "no"))
+
+ggplot(tidycovid, aes(x = key, y = fct_rev(id), fill = missing)) +
+  geom_tile(color = "white") + 
+  ggtitle("mtcars with NAs added") +
+  scale_fill_viridis_d() + # discrete scale
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust=.5, hjust=1))
+```
+
+```{r}
+x <- missing_data.frame(tidycovid)
+image(x)
+```
+
+```{r}
+library(extracat)
+#visna(tidycovid, sort = "b")
+#visna does not take data without missing value
+```
+
+```{r fig.width=10,fig.height=10}
+
 plot_missing(covid, percent = TRUE,angle=90,hjust=1)
 ```
+
+
 Insights:
 
 a) This is no missing value in this dataset so that we don't need to preprocess it.
 
 ### DATA-3 Mental Health Data
 ```{r fig.width=10,fig.height=12}
-mental <- read.csv("Mental_Health_Service_Finder_Data.csv", nrows = 100)
+mental <- read.csv("Mental_Health_Service_Finder_Data.csv",nrows = 100)
+```
+
+```{r fig.width=10,fig.height=12}
+tidymental <- mental %>% 
+    rownames_to_column("id") %>% 
+    gather(key, value, -id) %>% 
+    mutate(missing = ifelse(is.na(value), "yes", "no"))
+
+ggplot(tidymental, aes(x = key, y = fct_rev(id), fill = missing)) +
+  geom_tile(color = "white") + 
+  ggtitle("mtcars with NAs added") +
+  scale_fill_viridis_d() + # discrete scale
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust=.5, hjust=1))
+```
+
+```{r}
+x <- missing_data.frame(tidymental)
+image(x)
+```
+
+```{r}
+library(extracat)
+visna(mental, sort = "b")
+```
+
+```{r fig.width=10,fig.height=10}
+
 plot_missing(mental, percent = TRUE,angle=90,hjust=1)
 ```
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Pengyu Zou, Siyu Li, Nuanyu Shou" />
 
 
-<meta name="date" content="2021-11-17" />
+<meta name="date" content="2021-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="data-transformation.html"/>
 <link rel="next" href="results.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -173,31 +173,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-1-arrest-historic-data" class="section level3" number="4.0.1">
 <h3><span class="header-section-number">4.0.1</span> DATA-1 Arrest Historic Data</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="missing-values.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;plot_missing.R&quot;</span>)</span>
-<span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
-<span id="cb1-3"><a href="missing-values.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
+<span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="missing-values.html#cb2-1" aria-hidden="true" tabindex="-1"></a>tidynyc <span class="ot">&lt;-</span> nyc <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="missing-values.html#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="missing-values.html#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(key, value, <span class="sc">-</span>id) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="missing-values.html#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">missing =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(value), <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>))</span>
+<span id="cb2-5"><a href="missing-values.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="missing-values.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidynyc, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> <span class="fu">fct_rev</span>(id), <span class="at">fill =</span> missing)) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="missing-values.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb2-8"><a href="missing-values.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;mtcars with NAs added&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="missing-values.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span> <span class="co"># discrete scale</span></span>
+<span id="cb2-10"><a href="missing-values.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb2-11"><a href="missing-values.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust=</span>.<span class="dv">5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="960" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="missing-values.html#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">missing_data.frame</span>(tidynyc)</span>
+<span id="cb3-2"><a href="missing-values.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(x)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="missing-values.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extracat)</span>
+<span id="cb4-2"><a href="missing-values.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visna</span>(nyc, <span class="at">sort =</span> <span class="st">&quot;b&quot;</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="missing-values.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="960" /></p>
 <p>Insights:</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>In order to draw the picture more clearly, we select 100 rows of data for missing value plot.</p></li>
 <li><p>We can conclude that KY_CD and PD_CD have the highest percentage of missing value. Besides, X_COORD_CD, Y_COORD_CD, Latitude and Longitude belong to geographic location information and tend to miss together.</p></li>
+<li><p>Since the proportion of missing value for all column is small in total, so our dataset has good quality. We may just remove the rows which has missing value when we do the following analysis.</p></li>
 </ol>
-<p>c)Since the proportion of missing value for all column is small in total, so our dataset has good quality. We may just remove the rows which has missing value when we do the following analysis.</p>
 </div>
 <div id="data-2-covid-19-data" class="section level3" number="4.0.2">
 <h3><span class="header-section-number">4.0.2</span> DATA-2 COVID-19 Data</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="missing-values.html#cb2-1" aria-hidden="true" tabindex="-1"></a>covid <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
-<span id="cb2-2"><a href="missing-values.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(covid, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="960" />
-Insights:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="missing-values.html#cb6-1" aria-hidden="true" tabindex="-1"></a>covid <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="missing-values.html#cb7-1" aria-hidden="true" tabindex="-1"></a>tidycovid <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="missing-values.html#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="missing-values.html#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(key, value, <span class="sc">-</span>id) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="missing-values.html#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">missing =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(value), <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>))</span>
+<span id="cb7-5"><a href="missing-values.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="missing-values.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidycovid, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> <span class="fu">fct_rev</span>(id), <span class="at">fill =</span> missing)) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="missing-values.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb7-8"><a href="missing-values.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;mtcars with NAs added&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="missing-values.html#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span> <span class="co"># discrete scale</span></span>
+<span id="cb7-10"><a href="missing-values.html#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb7-11"><a href="missing-values.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust=</span>.<span class="dv">5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="missing-values.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">missing_data.frame</span>(tidycovid)</span>
+<span id="cb8-2"><a href="missing-values.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(x)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="missing-values.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extracat)</span>
+<span id="cb9-2"><a href="missing-values.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#visna(tidycovid, sort = &quot;b&quot;)</span></span>
+<span id="cb9-3"><a href="missing-values.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#visna does not take data without missing value</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="missing-values.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(covid, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
+<p>Insights:</p>
 <ol style="list-style-type: lower-alpha">
 <li>This is no missing value in this dataset so that we don’t need to preprocess it.</li>
 </ol>
 </div>
 <div id="data-3-mental-health-data" class="section level3" number="4.0.3">
 <h3><span class="header-section-number">4.0.3</span> DATA-3 Mental Health Data</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="missing-values.html#cb3-1" aria-hidden="true" tabindex="-1"></a>mental <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Mental_Health_Service_Finder_Data.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
-<span id="cb3-2"><a href="missing-values.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(mental, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="missing-values.html#cb11-1" aria-hidden="true" tabindex="-1"></a>mental <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Mental_Health_Service_Finder_Data.csv&quot;</span>,<span class="at">nrows =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="missing-values.html#cb12-1" aria-hidden="true" tabindex="-1"></a>tidymental <span class="ot">&lt;-</span> mental <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="missing-values.html#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="missing-values.html#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(key, value, <span class="sc">-</span>id) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="missing-values.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">missing =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(value), <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>))</span>
+<span id="cb12-5"><a href="missing-values.html#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="missing-values.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidymental, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> <span class="fu">fct_rev</span>(id), <span class="at">fill =</span> missing)) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="missing-values.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb12-8"><a href="missing-values.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;mtcars with NAs added&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="missing-values.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span> <span class="co"># discrete scale</span></span>
+<span id="cb12-10"><a href="missing-values.html#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb12-11"><a href="missing-values.html#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust=</span>.<span class="dv">5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="missing-values.html#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">missing_data.frame</span>(tidymental)</span>
+<span id="cb13-2"><a href="missing-values.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(x)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="missing-values.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extracat)</span>
+<span id="cb14-2"><a href="missing-values.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visna</span>(mental, <span class="at">sort =</span> <span class="st">&quot;b&quot;</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="missing-values.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(mental, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
 <p>Insights:</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Firstly, some columns like flag_vet, flag_pw, flag_si and so on have really high missing percentage(100% in our 100 sample), which will be discarded in our further analysis.</p></li>
