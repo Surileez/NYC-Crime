@@ -33,7 +33,7 @@
   
 <link rel="prev" href="data-transformation.html"/>
 <link rel="next" href="results.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -142,9 +142,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
 <ul>
-<li class="chapter" data-level="4.0.1" data-path="missing-values.html"><a href="missing-values.html#data-1"><i class="fa fa-check"></i><b>4.0.1</b> DATA-1</a></li>
-<li class="chapter" data-level="4.0.2" data-path="missing-values.html"><a href="missing-values.html#data-2"><i class="fa fa-check"></i><b>4.0.2</b> DATA-2</a></li>
-<li class="chapter" data-level="4.0.3" data-path="missing-values.html"><a href="missing-values.html#data-3"><i class="fa fa-check"></i><b>4.0.3</b> DATA-3</a></li>
+<li class="chapter" data-level="4.0.1" data-path="missing-values.html"><a href="missing-values.html#data-1-arrest-historic-data"><i class="fa fa-check"></i><b>4.0.1</b> DATA-1 Arrest Historic Data</a></li>
+<li class="chapter" data-level="4.0.2" data-path="missing-values.html"><a href="missing-values.html#data-2-covid-19-data"><i class="fa fa-check"></i><b>4.0.2</b> DATA-2 COVID-19 Data</a></li>
+<li class="chapter" data-level="4.0.3" data-path="missing-values.html"><a href="missing-values.html#data-3-mental-health-data"><i class="fa fa-check"></i><b>4.0.3</b> DATA-3 Mental Health Data</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
@@ -170,30 +170,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
-<div id="data-1" class="section level3" number="4.0.1">
-<h3><span class="header-section-number">4.0.1</span> DATA-1</h3>
+<div id="data-1-arrest-historic-data" class="section level3" number="4.0.1">
+<h3><span class="header-section-number">4.0.1</span> DATA-1 Arrest Historic Data</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="missing-values.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;plot_missing.R&quot;</span>)</span>
-<span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">1000</span>)</span>
-<span id="cb1-3"><a href="missing-values.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;NYPD_Arrests_Data__Historic_.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
+<span id="cb1-3"><a href="missing-values.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(nyc, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
-<p>Insights:
-* In order to draw the picture more clearly, we select 10,000 rows of data for missing value plot.
-* We can conclude that KY_CD and PD_CD have the highest percentage of missing value. Besides, X_COORD_CD, Y_COORD_CD, Latitude and Longitude belong to geographic location information and tend to miss together.
-* Since the proportion of missing value for all column is small in total, so our dataset’s quality is good. We may just remove the rows which has missing value when we do the following analysis.</p>
+<p>Insights:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>In order to draw the picture more clearly, we select 100 rows of data for missing value plot.</p></li>
+<li><p>We can conclude that KY_CD and PD_CD have the highest percentage of missing value. Besides, X_COORD_CD, Y_COORD_CD, Latitude and Longitude belong to geographic location information and tend to miss together.</p></li>
+</ol>
+<p>c)Since the proportion of missing value for all column is small in total, so our dataset has good quality. We may just remove the rows which has missing value when we do the following analysis.</p>
 </div>
-<div id="data-2" class="section level3" number="4.0.2">
-<h3><span class="header-section-number">4.0.2</span> DATA-2</h3>
+<div id="data-2-covid-19-data" class="section level3" number="4.0.2">
+<h3><span class="header-section-number">4.0.2</span> DATA-2 COVID-19 Data</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="missing-values.html#cb2-1" aria-hidden="true" tabindex="-1"></a>covid <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
-<span id="cb2-2"><a href="missing-values.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(covid, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb2-2"><a href="missing-values.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(covid, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="960" />
-Insights:
-This is no missing value in this dataset~</p>
+Insights:</p>
+<ol style="list-style-type: lower-alpha">
+<li>This is no missing value in this dataset so that we don’t need to preprocess it.</li>
+</ol>
 </div>
-<div id="data-3" class="section level3" number="4.0.3">
-<h3><span class="header-section-number">4.0.3</span> DATA-3</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="missing-values.html#cb3-1" aria-hidden="true" tabindex="-1"></a>mental <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Mental_Health_Service_Finder_Data.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">50</span>)</span>
-<span id="cb3-2"><a href="missing-values.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(mental, <span class="at">percent =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="data-3-mental-health-data" class="section level3" number="4.0.3">
+<h3><span class="header-section-number">4.0.3</span> DATA-3 Mental Health Data</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="missing-values.html#cb3-1" aria-hidden="true" tabindex="-1"></a>mental <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Mental_Health_Service_Finder_Data.csv&quot;</span>, <span class="at">nrows =</span> <span class="dv">100</span>)</span>
+<span id="cb3-2"><a href="missing-values.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(mental, <span class="at">percent =</span> <span class="cn">TRUE</span>,<span class="at">angle=</span><span class="dv">90</span>,<span class="at">hjust=</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
+<p>Insights:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Firstly, some columns like flag_vet, flag_pw, flag_si and so on have really high missing percentage(100% in our 100 sample), which will be discarded in our further analysis.</p></li>
+<li><p>In this dataset, the basic information such as name/phone/position is relatively complete while the measurements about mental health has much more missing value. So maybe we can explore the meaning of specific indicators and conclude people’s overall psychological condition in one district to avoid the drawbacks bringed by missing value.</p></li>
+</ol>
 
 </div>
 </div>
