@@ -26,7 +26,7 @@ tidynyc <- nyc %>%
 
 ggplot(tidynyc, aes(x = key, y = fct_rev(id), fill = missing)) +
   geom_tile(color = "white") + 
-  ggtitle("mtcars with NAs added") +
+  ggtitle("Missing pattern of arrests data") +
   scale_fill_viridis_d() + # discrete scale
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust=.5, hjust=1))
@@ -68,7 +68,7 @@ tidycovid <- covid %>%
 
 ggplot(tidycovid, aes(x = key, y = fct_rev(id), fill = missing)) +
   geom_tile(color = "white") + 
-  ggtitle("mtcars with NAs added") +
+  ggtitle("Missing pattern of COVID-19 data") +
   scale_fill_viridis_d() + # discrete scale
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust=.5, hjust=1))
@@ -97,7 +97,8 @@ a) This is no missing value in this dataset so that we don't need to preprocess 
 
 ### DATA-3 Mental Health Data
 ```{r fig.width=10,fig.height=12}
-mental <- read.csv("Mental_Health_Service_Finder_Data.csv",nrows = 100)
+mental <- read.csv("Mental_Health_Service_Finder_Data.csv")
+mental <- select(mental,-contains("flag"))
 ```
 
 ```{r fig.width=10,fig.height=12}
@@ -108,7 +109,7 @@ tidymental <- mental %>%
 
 ggplot(tidymental, aes(x = key, y = fct_rev(id), fill = missing)) +
   geom_tile(color = "white") + 
-  ggtitle("mtcars with NAs added") +
+  ggtitle("Missing pattern of mental health data") +
   scale_fill_viridis_d() + # discrete scale
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust=.5, hjust=1))
@@ -125,7 +126,6 @@ visna(mental, sort = "b")
 ```
 
 ```{r fig.width=10,fig.height=10}
-
 plot_missing(mental, percent = TRUE,angle=90,hjust=1)
 ```
 
