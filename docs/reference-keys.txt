@@ -2,9 +2,9 @@ introduction
 data-sources
 data-transformation
 missing-values
-data-1
-data-2
-data-3
+data-1-arrest-historic-data
+data-2-covid-19-data
+data-3-mental-health-data
 results
 interactive-component
 conclusion
