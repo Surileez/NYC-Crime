@@ -1,2 +1,94 @@
 # Data transformation
-this is for test~
+
+```{r results='hide',warning=FALSE}
+library(tidyverse)
+library(patchwork)
+library(reshape2)
+library(mi)
+library(readr)
+library(lubridate)
+library(extracat)
+library(ggplot2)
+library(dplyr)
+library(vcd)
+library(RColorBrewer)
+library(ggmosaic)
+library(ggmap)
+library(ggplot2)
+library(tidyr)
+library(cowplot)
+library(httr)
+library(rgdal)
+library(tigris)
+library(dplyr)
+library(broom)
+library(parcoords)
+options(dplyr.summarise.inform=FALSE)
+```
+
+In this project, we use 5 datasets, NYPD_Arrest_Data__Historic.csv,  NYPD_Arrest_Data__Year_to_Date.csv, NYPD_Hate_Crimes.csv, COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv, zicode-borough.csv and Mental_Health_Service_Finder_Data.csv. 
+
+We concentrate NYPD_Arrest_Data__Historic and NYPD_Arrest_Data__Year_to_Date to include most updated data in 2021. We convert *ARREST_DATE* to Date object and add 3 new columns *ARREST_YEAR*, *quarter* and *month* to display different statistics. In  addition, *JURISDICTION_CODE* and *AGE_GROUP* are converted to factor. Values in *OFNS_DESC* are merged according to types and mutated as the new column.
+
+```{r}
+nyc<- read_csv('NYPD_Arrests_Data__Historic_.csv')
+nyc<- nyc%>%mutate(ARREST_DATE=as.Date(nyc$ARREST_DATE,format='%m/%d/%Y'))
+
+nyc2021<-read_csv('NYPD_Arrest_Data__Year_to_Date_.csv')
+nyc2021<-nyc2021%>%mutate(ARREST_DATE=as.Date(nyc2021$ARREST_DATE,format='%m/%d/%Y'))
+colnames(nyc2021)[19]<- "Lon_Lat" 
+nyc<-rbind(nyc,nyc2021)
+
+nyc<- nyc%>%mutate(ARREST_YEAR= year(nyc$ARREST_DATE))
+
+df1<-nyc%>%select(ARREST_YEAR,JURISDICTION_CODE,AGE_GROUP,PERP_SEX,OFNS_DESC,ARREST_BORO)
+
+df1$JURISDICTION_CODE<-as.factor(df1$JURISDICTION_CODE)
+levels(df1$JURISDICTION_CODE)[!(levels(df1$JURISDICTION_CODE)%in% c("0","1","2"))] <- "other"
+
+df1<-df1%>%filter(!is.na(JURISDICTION_CODE))
+
+df1$AGE_GROUP<-as.factor(df1$AGE_GROUP)
+levels(df1$AGE_GROUP)[!(levels(df1$AGE_GROUP)%in% c("<18","18-24","25-44","45-64","65+"))] <- "unknown"
+df1$AGE_GROUP<-factor(df1$AGE_GROUP,levels=c("<18","18-24","25-44","45-64","65+","unknown"))
+
+head(df1)
+```
+
+In *NYPD_Hate_Crimes*, *DATE_OF_INTEREST* is renamed as *Date*. *ARREST_DATE* is converted to Date object. *NYPD_Hate_Crimes* is left outer joined by COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.
+
+```{r}
+
+covid <- read_csv("COVID-19_Daily_Counts_of_Cases__Hospitalizations__and_Deaths.csv")
+
+covid<- covid%>%
+  mutate(DATE_OF_INTEREST=as.Date(covid$DATE_OF_INTEREST,format='%m/%d/%Y'))
+
+cdf<-covid%>%select(DATE_OF_INTEREST,CASE_COUNT,HOSPITALIZED_COUNT,DEATH_COUNT)
+
+cdf1<-cdf%>%rename(Date=DATE_OF_INTEREST)%>%
+     select(Date,CASE_COUNT)
+
+hate<-read_csv('NYPD_Hate_Crimes.csv')
+
+hate<- hate%>%
+  mutate(Record_Date=as.Date(hate$`Record Create Date` ,format='%m/%d/%Y'))%>%
+  mutate(Date=paste0(`Complaint Year Number`, "-",`Month Number`,"-1"))%>%
+  mutate(Date=as.Date(Date))
+hate1<-hate%>%
+  group_by(`Date`)%>%
+  mutate(count=n())%>%
+  left_join(cdf1,by='Date')
+
+head(hate1)
+```
+
+*Mental_Health_Service_Finder_Data* and *zicode-borough* are merged, and Borough column is counted.
+
+```{r}
+mental_data <- read_csv('Mental_Health_Service_Finder_Data.csv')
+zipcode <- read_csv('zipcode-borough.csv')
+df_merge = merge(x = mental_data, y = zipcode, by = "zip", all.x = TRUE)
+df_mental_health = count(df_merge, Borough)
+head(df_mental_health,5)
+```
