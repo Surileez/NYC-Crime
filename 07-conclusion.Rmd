@@ -1,2 +1,11 @@
 # Conclusion
 
+In our project, we comprehensively analyze and visualize crime incidents in New York City from 2013 to 2021 from multiple perspectives such as magnitude, time, type, age, sex, position and so on. Besides, we also try to explore the connection between crime and other social factors such as COVID-19 VS hate crimes and Mental Health Service VS Drugs&Gun Crimes. Here are some conclusions and further suggestions:
+
+In terms of the overall crime situation in New York, the total number of crimes in New York City has been declining sharply every year from 2011-2021. The number of crimes dropped significantly in November and December. Among all types, the proportion of DANGEROUS DRUGS is constantly decreasing. And the proportion of ASSAULT 3 is constantly increasing, which means that more regulations should be introduced to solve this problem.
+
+Majority of the criminals were arrested by Patrol. The majority of criminals are 25-44, followed by 18-24,45-64,<18, while the minority is 65+. In addition, number of male criminals is about four times bigger than female. Among 5 boroughs, proportion of crime in Queens and Staten Island is increasing especially after 2015 so we should pay more attention on it.
+
+Besides, as for combining numbers of hate crimes with Covid-19 cases, after Feburary 2021, the trend of numbers of hate crime is lagging behind Covid-19 cases by about 2 months. As for the category, numbers of Religion/Religious Practice hate crimes is highest, followed by Race/Color, Sex Orientation, both three increase greatly around the start of 2021, maybe has some relationship with Covid-19, especially for ANTI-ASIAN hate crimes in detailed classification.
+
+What's more, as for mental health services, health centers are positively correlated with the number of crimes in borough level and the location of the mental health center is very consistent with the distribution of drug crime and weapon crime’s sites on map views. We can conclude NYC's mental health construction is now quite complete and supportive but we can add some mental health service centers in Rockaway Beach and in the eastern area of Brooklyn according to the crime situation.
